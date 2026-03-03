@@ -1,0 +1,8 @@
+Date: 2026-03-02
+Tap method: q999 per single-mic tap files
+fs: 48000 Hz
+Mapping:
+Mic1 -> ch2
+Mic2 -> ch0
+Mic3 -> ch1
+Mic4 -> ch3

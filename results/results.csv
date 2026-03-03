@@ -1,0 +1,12 @@
+wav,distance_m,angle_gt_deg,take,final_deg,error_deg,abs_error_deg,used_windows,total_windows,used_ratio,calib_file
+test_0deg_30cm.wav,0.3,0.0,1,0.0,0.0,0.0,-1,-1,nan,calib_030cm.json
+test_0deg_30cm_V2.wav,0.3,0.0,1,358.0,-2.0,2.0,-1,-1,nan,calib_030cm.json
+test_180deg_30cm.wav,0.3,180.0,1,180.0,0.0,0.0,-1,-1,nan,calib_030cm.json
+test_90deg_30cm.wav,0.3,90.0,1,90.0,0.0,0.0,-1,-1,nan,calib_030cm.json
+test_0deg_50cm.wav,0.5,0.0,1,0.0,0.0,0.0,-1,-1,nan,calib_050cm.json
+test_140deg_50cm.wav,0.5,140.0,1,135.0,-5.0,5.0,-1,-1,nan,calib_050cm.json
+test_180deg_50cm.wav,0.5,180.0,1,180.0,0.0,0.0,-1,-1,nan,calib_050cm.json
+test_90deg_50cm.wav,0.5,90.0,1,90.0,0.0,0.0,-1,-1,nan,calib_050cm.json
+test_0deg_181cm.wav,1.81,0.0,1,358.0,-2.0,2.0,-1,-1,nan,calib_181cm.json
+test_60deg_181cm.wav,1.81,60.0,1,88.0,28.0,28.0,-1,-1,nan,calib_181cm.json
+test_90deg_181cm.wav,1.81,90.0,1,92.0,2.0,2.0,-1,-1,nan,calib_181cm.json

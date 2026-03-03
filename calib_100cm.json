@@ -1,0 +1,16 @@
+{
+  "theta_offset_deg": 0.5,
+  "refs": [
+    {
+      "known_deg": 0.0,
+      "measured_raw_deg": 0.0,
+      "wav": "test_0deg_100cm.wav"
+    },
+    {
+      "known_deg": 180.0,
+      "measured_raw_deg": 179.0,
+      "wav": "test_180deg_100cm.wav"
+    }
+  ],
+  "notes": "theta_offset_deg is applied as (theta_raw + offset) % 360"
+}
