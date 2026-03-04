@@ -1,0 +1,36 @@
+{
+  "theta_offset_deg": 0.833261873468117,
+  "refs": [
+    {
+      "known_deg": 0.0,
+      "measured_raw_deg": 357.0,
+      "wav": "test_0deg_80cm_take1.wav"
+    },
+    {
+      "known_deg": 0.0,
+      "measured_raw_deg": 0.0,
+      "wav": "test_0deg_80cm_take2.wav"
+    },
+    {
+      "known_deg": 0.0,
+      "measured_raw_deg": 359.0,
+      "wav": "test_0deg_80cm_take3.wav"
+    },
+    {
+      "known_deg": 90.0,
+      "measured_raw_deg": 90.0,
+      "wav": "test_90deg_80cm_take1.wav"
+    },
+    {
+      "known_deg": 90.0,
+      "measured_raw_deg": 89.0,
+      "wav": "test_90deg_80cm_take2.wav"
+    },
+    {
+      "known_deg": 90.0,
+      "measured_raw_deg": 90.0,
+      "wav": "test_90deg_80cm_take3.wav"
+    }
+  ],
+  "notes": "theta_offset_deg is applied as (theta_raw + offset) % 360"
+}
