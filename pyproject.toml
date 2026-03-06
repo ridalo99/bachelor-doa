@@ -1,0 +1,17 @@
+# pyproject.toml  (Repo-Root: BAchelor_Arbeit/pyproject.toml)
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "doa-project"
+version = "0.1.0"
+description = "DOA estimation (SRP-PHAT/GCC-PHAT) tools"
+requires-python = ">=3.10"
+dependencies = ["numpy", "scipy", "soundfile"]
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
