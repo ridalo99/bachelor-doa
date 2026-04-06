@@ -1,0 +1,55 @@
+
+=== audio/test_0deg_take1.wav ===
+Model: far-field (plane-wave)
+
+Final DOA (auto-window): 127.00° (accepted 3/3, dom=1.00)
+
+=== audio/test_0deg_take3.wav ===
+Model: far-field (plane-wave)
+
+Final DOA (auto-window): 312.00° (accepted 3/3, dom=0.53)
+
+=== audio/test_180deg_take1.wav ===
+Model: far-field (plane-wave)
+
+Final DOA (auto-window): UNCERTAIN (accepted 3/3, dom=0.00)
+
+=== audio/test_180deg_take3.wav ===
+Model: far-field (plane-wave)
+
+Final DOA (auto-window): 307.00° (accepted 3/3, dom=1.00)
+
+=== audio/test_270deg_take1.wav ===
+Model: far-field (plane-wave)
+
+Final DOA (auto-window): 127.00° (accepted 3/3, dom=1.00)
+
+=== audio/test_270deg_take2.wav ===
+Model: far-field (plane-wave)
+
+Final DOA (auto-window): 132.00° (accepted 3/3, dom=0.51)
+
+=== audio/test_270deg_take3.wav ===
+Model: far-field (plane-wave)
+
+Final DOA (auto-window): UNCERTAIN (accepted 2/3, dom=0.00)
+
+=== audio/test_290deg_take1.wav ===
+Model: far-field (plane-wave)
+
+Final DOA (auto-window): 123.00° (accepted 3/3, dom=0.78)
+
+=== audio/test_40deg_take1.wav ===
+Model: far-field (plane-wave)
+
+Final DOA (auto-window): 123.00° (accepted 3/3, dom=1.00)
+
+=== audio/test_90deg_take1.wav ===
+Model: far-field (plane-wave)
+
+Final DOA (auto-window): 303.00° (accepted 3/3, dom=0.84)
+
+=== audio/test_90deg_take3.wav ===
+Model: far-field (plane-wave)
+
+Final DOA (auto-window): 35.00° (accepted 3/3, dom=1.00)

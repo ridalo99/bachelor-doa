@@ -1,0 +1,177 @@
+
+=== audio/horn_0deg_10m_take1.wav ===
+Model: far-field (plane-wave)
+
+[auto-event 1] window 1.35-1.95s rms=0.001988 expanded 1.20-2.10s
+  t=1.50s -> theta=225.0° raw=225.0° conf=0.0505
+  t=1.60s -> theta=225.0° raw=225.0° conf=0.0235
+  t=1.70s -> theta=90.0° raw=90.0° conf=0.0156
+  t=1.75s -> theta=90.0° raw=90.0° conf=0.0115
+  t=1.65s -> theta=270.0° raw=270.0° conf=0.0106
+  t=1.55s -> theta=90.0° raw=90.0° conf=0.0028
+  dom_ratio=1.00 best_conf=0.0505 event_theta=222.00°
+
+Final DOA (auto-window): 222.00° (accepted 1/1, dom=1.00)
+
+=== audio/horn_120deg_10m_take1.wav ===
+Model: far-field (plane-wave)
+
+[auto-event 1] window 6.43-7.03s rms=0.001760 expanded 6.28-7.18s
+  t=6.83s -> theta=270.0° raw=270.0° conf=0.0851
+  t=6.73s -> theta=270.0° raw=270.0° conf=0.0838
+  t=6.58s -> theta=270.0° raw=270.0° conf=0.0626
+  t=6.88s -> theta=358.0° raw=358.0° conf=0.0536
+  t=6.68s -> theta=270.0° raw=270.0° conf=0.0520
+  t=6.63s -> theta=270.0° raw=270.0° conf=0.0433
+  dom_ratio=0.84 best_conf=0.0851 event_theta=267.00°
+
+Final DOA (auto-window): 267.00° (accepted 1/1, dom=0.84)
+
+=== audio/horn_150deg_10m_take1.wav ===
+Model: far-field (plane-wave)
+
+[auto-event 1] window 3.21-3.81s rms=0.001644 expanded 3.06-3.96s
+  t=3.61s -> theta=226.0° raw=226.0° conf=0.1831
+  t=3.66s -> theta=178.0° raw=178.0° conf=0.1804
+  t=3.46s -> theta=90.0° raw=90.0° conf=0.0971
+  t=3.56s -> theta=92.0° raw=92.0° conf=0.0581
+  t=3.36s -> theta=358.0° raw=358.0° conf=0.0443
+  t=3.51s -> theta=270.0° raw=270.0° conf=0.0217
+  dom_ratio=0.35 best_conf=0.1831 event_theta=226.00°
+
+Auto-window events summary:
+  event1: win=3.21-3.81s theta=226.00° dom=0.35 best_conf=0.1831 used=4/7 -> REJECT
+
+Final DOA (auto-window): UNCERTAIN (accepted 0/1, dom=0.35)
+
+=== audio/horn_180deg_10m_take1.wav ===
+Model: far-field (plane-wave)
+
+[auto-event 1] window 5.17-5.77s rms=0.002339 expanded 5.02-5.92s
+  t=5.52s -> theta=0.0° raw=0.0° conf=0.1823
+  t=5.47s -> theta=270.0° raw=270.0° conf=0.1130
+  t=5.42s -> theta=270.0° raw=270.0° conf=0.0932
+  t=5.32s -> theta=270.0° raw=270.0° conf=0.0738
+  t=5.37s -> theta=270.0° raw=270.0° conf=0.0540
+  t=5.62s -> theta=270.0° raw=270.0° conf=0.0309
+  dom_ratio=0.65 best_conf=0.1823 event_theta=267.00°
+
+Final DOA (auto-window): 267.00° (accepted 1/1, dom=0.65)
+
+=== audio/horn_210deg_10m_take1.wav ===
+Model: far-field (plane-wave)
+
+[auto-event 1] window 2.08-2.68s rms=0.001798 expanded 1.93-2.83s
+  t=2.38s -> theta=272.0° raw=272.0° conf=0.1497
+  t=2.33s -> theta=270.0° raw=270.0° conf=0.1089
+  t=2.23s -> theta=225.0° raw=225.0° conf=0.0949
+  t=2.48s -> theta=270.0° raw=270.0° conf=0.0698
+  t=2.53s -> theta=270.0° raw=270.0° conf=0.0455
+  t=2.28s -> theta=270.0° raw=270.0° conf=0.0378
+  dom_ratio=0.78 best_conf=0.1497 event_theta=269.00°
+
+Final DOA (auto-window): 269.00° (accepted 1/1, dom=0.78)
+
+=== audio/horn_240deg_10m_take1.wav ===
+Model: far-field (plane-wave)
+
+[auto-event 1] window 3.46-4.06s rms=0.001664 expanded 3.31-4.21s
+  t=3.66s -> theta=178.0° raw=178.0° conf=0.2375
+  t=3.61s -> theta=225.0° raw=225.0° conf=0.1409
+  t=3.76s -> theta=225.0° raw=225.0° conf=0.0893
+  t=3.81s -> theta=225.0° raw=225.0° conf=0.0769
+  t=3.86s -> theta=225.0° raw=225.0° conf=0.0640
+  t=3.91s -> theta=180.0° raw=180.0° conf=0.0503
+  dom_ratio=0.56 best_conf=0.2375 event_theta=222.00°
+
+Final DOA (auto-window): 222.00° (accepted 1/1, dom=0.56)
+
+=== audio/horn_270deg_10m_take1.wav ===
+Model: far-field (plane-wave)
+
+[auto-event 1] window 7.21-7.81s rms=0.002008 expanded 7.06-7.96s
+  t=7.41s -> theta=178.0° raw=178.0° conf=0.1991
+  t=7.51s -> theta=90.0° raw=90.0° conf=0.0424
+  t=7.56s -> theta=90.0° raw=90.0° conf=0.0213
+  t=7.36s -> theta=90.0° raw=90.0° conf=0.0184
+  t=7.46s -> theta=90.0° raw=90.0° conf=0.0163
+  t=7.61s -> theta=90.0° raw=90.0° conf=0.0029
+  dom_ratio=1.00 best_conf=0.1991 event_theta=175.00°
+
+Final DOA (auto-window): 175.00° (accepted 1/1, dom=1.00)
+
+=== audio/horn_300deg_10m_take1.wav ===
+Model: far-field (plane-wave)
+
+[auto-event 1] window 2.44-3.04s rms=0.001657 expanded 2.29-3.19s
+  t=2.69s -> theta=135.0° raw=135.0° conf=0.2165
+  t=2.59s -> theta=358.0° raw=358.0° conf=0.1700
+  t=2.64s -> theta=90.0° raw=90.0° conf=0.1108
+  t=2.89s -> theta=182.0° raw=182.0° conf=0.0927
+  t=2.79s -> theta=90.0° raw=90.0° conf=0.0518
+  t=2.84s -> theta=90.0° raw=90.0° conf=0.0277
+  dom_ratio=0.34 best_conf=0.2165 event_theta=135.00°
+
+Auto-window events summary:
+  event1: win=2.44-3.04s theta=135.00° dom=0.34 best_conf=0.2165 used=5/7 -> REJECT
+
+Final DOA (auto-window): UNCERTAIN (accepted 0/1, dom=0.34)
+
+=== audio/horn_30deg_10m_take1.wav ===
+Model: far-field (plane-wave)
+
+[auto-event 1] window 2.92-3.52s rms=0.001140 expanded 2.77-3.67s
+  t=3.17s -> theta=2.0° raw=2.0° conf=0.1734
+  t=3.12s -> theta=178.0° raw=178.0° conf=0.1097
+  t=3.27s -> theta=88.0° raw=88.0° conf=0.1041
+  t=3.32s -> theta=90.0° raw=90.0° conf=0.0768
+  t=3.07s -> theta=178.0° raw=178.0° conf=0.0607
+  t=3.37s -> theta=358.0° raw=358.0° conf=0.0392
+  dom_ratio=0.34 best_conf=0.1734 event_theta=2.00°
+
+Auto-window events summary:
+  event1: win=2.92-3.52s theta=2.00° dom=0.34 best_conf=0.1734 used=5/7 -> REJECT
+
+Final DOA (auto-window): UNCERTAIN (accepted 0/1, dom=0.34)
+
+=== audio/horn_330deg_10m_take1.wav ===
+Model: far-field (plane-wave)
+
+[auto-event 1] window 9.64-10.24s rms=0.001200 expanded 9.49-10.39s
+  t=10.04s -> theta=178.0° raw=178.0° conf=0.1552
+  t=9.94s -> theta=135.0° raw=135.0° conf=0.1169
+  t=9.99s -> theta=176.0° raw=176.0° conf=0.0802
+  t=9.84s -> theta=270.0° raw=270.0° conf=0.0172
+  t=9.89s -> theta=270.0° raw=270.0° conf=0.0159
+  t=9.79s -> theta=90.0° raw=90.0° conf=0.0037
+  dom_ratio=0.67 best_conf=0.1552 event_theta=175.00°
+
+Final DOA (auto-window): 175.00° (accepted 1/1, dom=0.67)
+
+=== audio/horn_60deg_10m_take1.wav ===
+Model: far-field (plane-wave)
+
+[auto-event 1] window 6.49-7.09s rms=0.001749 expanded 6.34-7.24s
+  t=6.84s -> theta=178.0° raw=178.0° conf=0.1862
+  t=6.79s -> theta=135.0° raw=135.0° conf=0.1449
+  t=6.94s -> theta=178.0° raw=178.0° conf=0.1274
+  t=6.64s -> theta=268.0° raw=268.0° conf=0.0983
+  t=6.89s -> theta=178.0° raw=178.0° conf=0.0757
+  t=6.74s -> theta=135.0° raw=135.0° conf=0.0719
+  dom_ratio=0.55 best_conf=0.1862 event_theta=175.00°
+
+Final DOA (auto-window): 175.00° (accepted 1/1, dom=0.55)
+
+=== audio/horn_90deg_10m_take1.wav ===
+Model: far-field (plane-wave)
+
+[auto-event 1] window 2.09-2.69s rms=0.002149 expanded 1.94-2.84s
+  t=2.34s -> theta=270.0° raw=270.0° conf=0.0931
+  t=2.24s -> theta=270.0° raw=270.0° conf=0.0911
+  t=2.49s -> theta=270.0° raw=270.0° conf=0.0866
+  t=2.29s -> theta=270.0° raw=270.0° conf=0.0762
+  t=2.39s -> theta=268.0° raw=268.0° conf=0.0748
+  t=2.54s -> theta=225.0° raw=225.0° conf=0.0334
+  dom_ratio=1.00 best_conf=0.0931 event_theta=267.00°
+
+Final DOA (auto-window): 267.00° (accepted 1/1, dom=1.00)

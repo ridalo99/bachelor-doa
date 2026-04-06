@@ -1,0 +1,256 @@
+
+=== audio/test_0deg_take1.wav ===
+Model: near-field (r=2.0 m)
+
+[auto-event 1] window 2.79-3.24s rms=0.001308 expanded 2.69-3.34s
+  t=2.89s -> theta=43.9° raw=2.0° conf=0.3375
+  t=3.09s -> theta=43.9° raw=2.0° conf=0.1878
+  t=2.99s -> theta=266.9° raw=225.0° conf=0.1485
+  t=3.04s -> theta=43.9° raw=2.0° conf=0.0833
+  t=2.94s -> theta=131.9° raw=90.0° conf=0.0316
+  dom_ratio=0.80 best_conf=0.3375 event_theta=41.00°
+
+[auto-event 2] window 4.19-4.64s rms=0.001288 expanded 4.09-4.74s
+  t=4.29s -> theta=43.9° raw=2.0° conf=0.3360
+  t=4.49s -> theta=43.9° raw=2.0° conf=0.2711
+  t=4.39s -> theta=266.9° raw=225.0° conf=0.1525
+  t=4.34s -> theta=131.9° raw=90.0° conf=0.0321
+  t=4.44s -> theta=43.9° raw=2.0° conf=0.0266
+  dom_ratio=0.80 best_conf=0.3360 event_theta=41.00°
+
+[auto-event 3] window 5.59-6.04s rms=0.001279 expanded 5.49-6.14s
+  t=5.69s -> theta=43.9° raw=2.0° conf=0.3371
+  t=5.89s -> theta=43.9° raw=2.0° conf=0.2797
+  t=5.79s -> theta=266.9° raw=225.0° conf=0.1553
+  t=5.84s -> theta=43.9° raw=2.0° conf=0.0327
+  t=5.74s -> theta=131.9° raw=90.0° conf=0.0320
+  dom_ratio=0.80 best_conf=0.3371 event_theta=41.00°
+
+[auto-event 4] window 8.66-9.11s rms=0.001288 expanded 8.56-9.21s
+  t=8.81s -> theta=39.9° raw=358.0° conf=0.1912
+  t=8.76s -> theta=39.9° raw=358.0° conf=0.1516
+  t=8.96s -> theta=356.9° raw=315.0° conf=0.0793
+  t=8.86s -> theta=223.9° raw=182.0° conf=0.0301
+  t=8.91s -> theta=131.9° raw=90.0° conf=0.0052
+  dom_ratio=0.81 best_conf=0.1912 event_theta=37.00°
+
+[auto-event 5] window 10.06-10.51s rms=0.001277 expanded 9.96-10.61s
+  t=10.16s -> theta=39.9° raw=358.0° conf=0.1497
+  t=10.21s -> theta=39.9° raw=358.0° conf=0.1178
+  t=10.26s -> theta=223.9° raw=182.0° conf=0.0901
+  t=10.36s -> theta=356.9° raw=315.0° conf=0.0794
+  t=10.31s -> theta=131.9° raw=90.0° conf=0.0058
+  dom_ratio=0.61 best_conf=0.1497 event_theta=37.00°
+
+Auto-window events summary:
+  event1: win=2.79-3.24s theta=41.00° dom=0.80 best_conf=0.3375 used=4/5 -> ACCEPT
+  event2: win=4.19-4.64s theta=41.00° dom=0.80 best_conf=0.3360 used=3/5 -> ACCEPT
+  event3: win=5.59-6.04s theta=41.00° dom=0.80 best_conf=0.3371 used=3/5 -> ACCEPT
+  event4: win=8.66-9.11s theta=37.00° dom=0.81 best_conf=0.1912 used=3/5 -> ACCEPT
+  event5: win=10.06-10.51s theta=37.00° dom=0.61 best_conf=0.1497 used=4/5 -> ACCEPT
+
+Final DOA (auto-window): 36.00° (accepted 5/5, dom=1.00)
+
+=== audio/test_90deg_take1.wav ===
+Model: near-field (r=2.0 m)
+
+[auto-event 1] window 0.08-0.53s rms=0.000009 expanded 0.00-0.63s
+  t=0.30s -> theta=266.9° raw=225.0° conf=0.2982
+  t=0.20s -> theta=87.9° raw=46.0° conf=0.1522
+  t=0.35s -> theta=219.9° raw=178.0° conf=0.1242
+  t=0.25s -> theta=219.9° raw=178.0° conf=0.0961
+  t=0.40s -> theta=223.9° raw=182.0° conf=0.0801
+  dom_ratio=0.40 best_conf=0.2982 event_theta=221.00°
+
+[auto-event 2] window 1.13-1.58s rms=0.000009 expanded 1.03-1.68s
+  t=1.33s -> theta=266.9° raw=225.0° conf=0.3341
+  t=1.43s -> theta=356.9° raw=315.0° conf=0.1338
+  t=1.48s -> theta=219.9° raw=178.0° conf=0.1259
+  t=1.28s -> theta=41.9° raw=0.0° conf=0.1226
+  t=1.23s -> theta=219.9° raw=178.0° conf=0.1057
+  t=1.38s -> theta=131.9° raw=90.0° conf=0.0315
+  dom_ratio=0.41 best_conf=0.3341 event_theta=264.00°
+
+[auto-event 3] window 2.75-3.20s rms=0.003564 expanded 2.65-3.30s
+  t=3.00s -> theta=311.9° raw=270.0° conf=0.1052
+  t=3.05s -> theta=221.9° raw=180.0° conf=0.0971
+  t=2.95s -> theta=311.9° raw=270.0° conf=0.0608
+  t=2.90s -> theta=312.9° raw=271.0° conf=0.0454
+  t=2.85s -> theta=219.9° raw=178.0° conf=0.0188
+  dom_ratio=0.63 best_conf=0.1052 event_theta=309.00°
+
+[auto-event 4] window 4.15-4.60s rms=0.003514 expanded 4.05-4.70s
+  t=4.45s -> theta=219.9° raw=178.0° conf=0.2656
+  t=4.40s -> theta=311.9° raw=270.0° conf=0.1145
+  t=4.25s -> theta=219.9° raw=178.0° conf=0.0973
+  t=4.35s -> theta=311.9° raw=270.0° conf=0.0594
+  t=4.30s -> theta=313.9° raw=272.0° conf=0.0571
+  dom_ratio=0.61 best_conf=0.2656 event_theta=217.00°
+
+[auto-event 5] window 5.55-6.00s rms=0.003494 expanded 5.45-6.10s
+  t=5.85s -> theta=219.9° raw=178.0° conf=0.2805
+  t=5.80s -> theta=311.9° raw=270.0° conf=0.1154
+  t=5.65s -> theta=219.9° raw=178.0° conf=0.1142
+  t=5.70s -> theta=313.9° raw=272.0° conf=0.0688
+  t=5.75s -> theta=311.9° raw=270.0° conf=0.0602
+  dom_ratio=0.62 best_conf=0.2805 event_theta=217.00°
+
+Auto-window events summary:
+  event1: win=0.08-0.53s theta=221.00° dom=0.40 best_conf=0.2982 used=5/5 -> ACCEPT
+  event2: win=1.13-1.58s theta=264.00° dom=0.41 best_conf=0.3341 used=5/6 -> ACCEPT
+  event3: win=2.75-3.20s theta=309.00° dom=0.63 best_conf=0.1052 used=3/5 -> ACCEPT
+  event4: win=4.15-4.60s theta=217.00° dom=0.61 best_conf=0.2656 used=5/5 -> ACCEPT
+  event5: win=5.55-6.00s theta=217.00° dom=0.62 best_conf=0.2805 used=5/5 -> ACCEPT
+
+Final DOA (auto-window): 216.00° (accepted 5/5, dom=0.84)
+
+=== audio/test_180deg_take1.wav ===
+Model: near-field (r=2.0 m)
+
+[auto-event 1] window 2.38-2.83s rms=0.002290 expanded 2.28-2.93s
+  t=2.53s -> theta=221.9° raw=180.0° conf=0.2200
+  t=2.48s -> theta=356.9° raw=315.0° conf=0.2179
+  t=2.68s -> theta=356.9° raw=315.0° conf=0.0805
+  t=2.58s -> theta=43.9° raw=2.0° conf=0.0671
+  t=2.63s -> theta=223.9° raw=182.0° conf=0.0097
+  dom_ratio=0.51 best_conf=0.2200 event_theta=0.00°
+
+[auto-event 2] window 3.78-4.23s rms=0.002257 expanded 3.68-4.33s
+  t=3.93s -> theta=221.9° raw=180.0° conf=0.2347
+  t=3.88s -> theta=356.9° raw=315.0° conf=0.1752
+  t=3.98s -> theta=43.9° raw=2.0° conf=0.0897
+  t=4.08s -> theta=356.9° raw=315.0° conf=0.0478
+  t=4.03s -> theta=223.9° raw=182.0° conf=0.0072
+  dom_ratio=0.47 best_conf=0.2347 event_theta=219.00°
+
+[auto-event 3] window 4.59-5.04s rms=0.000005 expanded 4.49-5.14s
+  t=4.74s -> theta=266.9° raw=225.0° conf=0.1592
+  t=4.79s -> theta=133.9° raw=92.0° conf=0.0506
+  t=4.69s -> theta=311.9° raw=270.0° conf=0.0393
+  t=4.89s -> theta=43.9° raw=2.0° conf=0.0122
+  t=4.84s -> theta=219.9° raw=178.0° conf=0.0026
+  dom_ratio=0.76 best_conf=0.1592 event_theta=264.00°
+
+[auto-event 4] window 6.89-7.34s rms=0.002264 expanded 6.79-7.44s
+  t=7.14s -> theta=43.9° raw=2.0° conf=0.2385
+  t=6.99s -> theta=356.9° raw=315.0° conf=0.1308
+  t=7.19s -> theta=223.9° raw=182.0° conf=0.1251
+  t=7.04s -> theta=37.9° raw=356.0° conf=0.0278
+  t=7.09s -> theta=221.9° raw=180.0° conf=0.0258
+  dom_ratio=0.48 best_conf=0.2385 event_theta=41.00°
+
+[auto-event 5] window 8.29-8.74s rms=0.002238 expanded 8.19-8.84s
+  t=8.54s -> theta=43.9° raw=2.0° conf=0.2444
+  t=8.49s -> theta=221.9° raw=180.0° conf=0.1307
+  t=8.59s -> theta=223.9° raw=182.0° conf=0.1293
+  t=8.39s -> theta=356.9° raw=315.0° conf=0.0711
+  t=8.64s -> theta=266.9° raw=225.0° conf=0.0631
+  t=8.44s -> theta=37.9° raw=356.0° conf=0.0244
+  dom_ratio=0.41 best_conf=0.2444 event_theta=221.00°
+
+Final DOA (auto-window): UNCERTAIN (accepted 5/5, dom=0.00)
+
+=== audio/test_270deg_take1.wav ===
+Model: near-field (r=2.0 m)
+
+[auto-event 1] window 3.77-4.22s rms=0.001447 expanded 3.67-4.32s
+  t=3.92s -> theta=43.9° raw=2.0° conf=0.2021
+  t=3.97s -> theta=221.9° raw=180.0° conf=0.0887
+  t=4.07s -> theta=131.9° raw=90.0° conf=0.0222
+  t=3.87s -> theta=311.9° raw=270.0° conf=0.0172
+  t=4.02s -> theta=223.9° raw=182.0° conf=0.0166
+  dom_ratio=0.70 best_conf=0.2021 event_theta=41.00°
+
+[auto-event 2] window 5.17-5.62s rms=0.001424 expanded 5.07-5.72s
+  t=5.32s -> theta=43.9° raw=2.0° conf=0.2140
+  t=5.37s -> theta=221.9° raw=180.0° conf=0.0618
+  t=5.42s -> theta=223.9° raw=182.0° conf=0.0294
+  t=5.27s -> theta=311.9° raw=270.0° conf=0.0175
+  t=5.47s -> theta=131.9° raw=90.0° conf=0.0173
+  dom_ratio=0.78 best_conf=0.2140 event_theta=41.00°
+
+[auto-event 3] window 6.57-7.02s rms=0.001415 expanded 6.47-7.12s
+  t=6.72s -> theta=43.9° raw=2.0° conf=0.1491
+  t=6.77s -> theta=221.9° raw=180.0° conf=0.0707
+  t=6.82s -> theta=223.9° raw=182.0° conf=0.0331
+  t=6.87s -> theta=131.9° raw=90.0° conf=0.0190
+  t=6.67s -> theta=311.9° raw=270.0° conf=0.0176
+  dom_ratio=0.68 best_conf=0.1491 event_theta=41.00°
+
+[auto-event 4] window 7.38-7.83s rms=0.000005 expanded 7.28-7.93s
+  t=7.58s -> theta=39.9° raw=358.0° conf=0.1739
+  t=7.53s -> theta=223.9° raw=182.0° conf=0.1085
+  t=7.48s -> theta=43.9° raw=2.0° conf=0.0565
+  t=7.68s -> theta=43.9° raw=2.0° conf=0.0330
+  t=7.63s -> theta=131.9° raw=90.0° conf=0.0013
+  dom_ratio=0.68 best_conf=0.1739 event_theta=41.00°
+
+[auto-event 5] window 8.67-9.12s rms=0.000003 expanded 8.57-9.22s
+  t=8.82s -> theta=43.9° raw=2.0° conf=0.2131
+  t=8.97s -> theta=133.9° raw=92.0° conf=0.1642
+  t=8.92s -> theta=133.9° raw=92.0° conf=0.1366
+  t=8.87s -> theta=43.9° raw=2.0° conf=0.0961
+  t=8.77s -> theta=223.9° raw=182.0° conf=0.0223
+  dom_ratio=0.51 best_conf=0.2131 event_theta=41.00°
+
+Auto-window events summary:
+  event1: win=3.77-4.22s theta=41.00° dom=0.70 best_conf=0.2021 used=2/5 -> ACCEPT
+  event2: win=5.17-5.62s theta=41.00° dom=0.78 best_conf=0.2140 used=2/5 -> ACCEPT
+  event3: win=6.57-7.02s theta=41.00° dom=0.68 best_conf=0.1491 used=2/5 -> ACCEPT
+  event4: win=7.38-7.83s theta=41.00° dom=0.68 best_conf=0.1739 used=3/5 -> ACCEPT
+  event5: win=8.67-9.12s theta=41.00° dom=0.51 best_conf=0.2131 used=4/5 -> ACCEPT
+
+Final DOA (auto-window): 36.00° (accepted 5/5, dom=1.00)
+
+=== audio/test_270deg_take2.wav ===
+Model: near-field (r=2.0 m)
+
+[auto-event 1] window 3.58-4.03s rms=0.002941 expanded 3.48-4.13s
+  t=3.78s -> theta=219.9° raw=178.0° conf=0.1616
+  t=3.68s -> theta=131.9° raw=90.0° conf=0.0913
+  t=3.83s -> theta=131.9° raw=90.0° conf=0.0881
+  t=3.73s -> theta=39.9° raw=358.0° conf=0.0583
+  t=3.88s -> theta=223.9° raw=182.0° conf=0.0235
+  dom_ratio=0.45 best_conf=0.1616 event_theta=129.00°
+
+[auto-event 2] window 4.98-5.43s rms=0.002902 expanded 4.88-5.53s
+  t=5.18s -> theta=219.9° raw=178.0° conf=0.1760
+  t=5.13s -> theta=39.9° raw=358.0° conf=0.1644
+  t=5.28s -> theta=43.9° raw=2.0° conf=0.1434
+  t=5.08s -> theta=131.9° raw=90.0° conf=0.1071
+  t=5.23s -> theta=131.9° raw=90.0° conf=0.0672
+  dom_ratio=0.47 best_conf=0.1760 event_theta=41.00°
+
+[auto-event 3] window 6.38-6.83s rms=0.002880 expanded 6.28-6.93s
+  t=6.53s -> theta=39.9° raw=358.0° conf=0.2135
+  t=6.58s -> theta=219.9° raw=178.0° conf=0.1872
+  t=6.68s -> theta=43.9° raw=2.0° conf=0.1408
+  t=6.48s -> theta=131.9° raw=90.0° conf=0.1136
+  t=6.63s -> theta=131.9° raw=90.0° conf=0.0675
+  dom_ratio=0.49 best_conf=0.2135 event_theta=41.00°
+
+[auto-event 4] window 9.23-9.68s rms=0.002895 expanded 9.13-9.78s
+  t=9.33s -> theta=131.9° raw=90.0° conf=0.0675
+  t=9.38s -> theta=221.9° raw=180.0° conf=0.0527
+  t=9.48s -> theta=131.9° raw=90.0° conf=0.0520
+  t=9.53s -> theta=266.9° raw=225.0° conf=0.0413
+  t=9.43s -> theta=131.9° raw=90.0° conf=0.0251
+  dom_ratio=0.69 best_conf=0.0675 event_theta=129.00°
+
+[auto-event 5] window 10.04-10.49s rms=0.000006 expanded 9.94-10.59s
+  t=10.29s -> theta=43.9° raw=2.0° conf=0.1467
+  t=10.14s -> theta=39.9° raw=358.0° conf=0.1363
+  t=10.34s -> theta=129.9° raw=88.0° conf=0.0701
+  t=10.24s -> theta=131.9° raw=90.0° conf=0.0134
+  t=10.39s -> theta=219.9° raw=178.0° conf=0.0070
+  t=10.19s -> theta=131.9° raw=90.0° conf=0.0043
+  dom_ratio=0.80 best_conf=0.1467 event_theta=41.00°
+
+Auto-window events summary:
+  event1: win=3.58-4.03s theta=129.00° dom=0.45 best_conf=0.1616 used=4/5 -> ACCEPT
+  event2: win=4.98-5.43s theta=41.00° dom=0.47 best_conf=0.1760 used=5/5 -> ACCEPT
+  event3: win=6.38-6.83s theta=41.00° dom=0.49 best_conf=0.2135 used=5/5 -> ACCEPT
+  event4: win=9.23-9.68s theta=129.00° dom=0.69 best_conf=0.0675 used=3/5 -> ACCEPT
+  event5: win=10.04-10.49s theta=41.00° dom=0.80 best_conf=0.1467 used=3/6 -> ACCEPT
+
+Final DOA (auto-window): 36.00° (accepted 5/5, dom=0.63)

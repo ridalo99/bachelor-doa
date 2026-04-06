@@ -1,3 +1,4 @@
 {
-  "theta_offset_deg": 182.0
+  "theta_offset_deg": 7.0,
+  "mic_to_ch":{"M1":3,"M2":0,"M3":1,"M4":2}
 }

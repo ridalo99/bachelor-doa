@@ -1,0 +1,90 @@
+
+=== audio/outdoor_2m_0deg_take1.wav ===
+Model: near-field (r=2.0 m)
+
+Final DOA (auto-window): 188.00° (accepted 3/3, dom=0.61)
+
+=== audio/outdoor_2m_0deg_take2.wav ===
+Model: near-field (r=2.0 m)
+
+Final DOA (auto-window): 187.00° (accepted 3/3, dom=1.00)
+
+=== audio/outdoor_2m_0deg_take3.wav ===
+Model: near-field (r=2.0 m)
+
+Final DOA (auto-window): 188.00° (accepted 3/3, dom=0.87)
+
+=== audio/outdoor_2m_140deg_take1.wav ===
+Model: near-field (r=2.0 m)
+
+Final DOA (auto-window): 323.00° (accepted 3/3, dom=1.00)
+
+=== audio/outdoor_2m_140deg_take2.wav ===
+Model: near-field (r=2.0 m)
+
+Final DOA (auto-window): 232.00° (accepted 3/3, dom=0.85)
+
+=== audio/outdoor_2m_140deg_take3.wav ===
+Model: near-field (r=2.0 m)
+
+Final DOA (auto-window): 323.00° (accepted 3/3, dom=0.88)
+
+=== audio/outdoor_2m_180deg_take1.wav ===
+Model: near-field (r=2.0 m)
+
+Final DOA (auto-window): 7.00° (accepted 3/3, dom=1.00)
+
+=== audio/outdoor_2m_180deg_take2.wav ===
+Model: near-field (r=2.0 m)
+
+Final DOA (auto-window): 7.00° (accepted 3/3, dom=1.00)
+
+=== audio/outdoor_2m_180deg_take3.wav ===
+Model: near-field (r=2.0 m)
+
+Final DOA (auto-window): 7.00° (accepted 3/3, dom=1.00)
+
+=== audio/outdoor_2m_270deg_take1.wav ===
+Model: near-field (r=2.0 m)
+
+Final DOA (auto-window): 98.00° (accepted 3/3, dom=1.00)
+
+=== audio/outdoor_2m_270deg_take2.wav ===
+Model: near-field (r=2.0 m)
+
+Final DOA (auto-window): 188.00° (accepted 2/3, dom=0.77)
+
+=== audio/outdoor_2m_270deg_take3.wav ===
+Model: near-field (r=2.0 m)
+
+Final DOA (auto-window): 98.00° (accepted 3/3, dom=1.00)
+
+=== audio/outdoor_2m_45deg_take1.wav ===
+Model: near-field (r=2.0 m)
+
+Final DOA (auto-window): UNCERTAIN (accepted 3/3, dom=0.57)
+
+=== audio/outdoor_2m_45deg_take2.wav ===
+Model: near-field (r=2.0 m)
+
+Final DOA (auto-window): UNCERTAIN (accepted 2/3, dom=0.51)
+
+=== audio/outdoor_2m_45deg_take3.wav ===
+Model: near-field (r=2.0 m)
+
+Final DOA (auto-window): 232.00° (accepted 3/3, dom=1.00)
+
+=== audio/outdoor_2m_90deg_take1.wav ===
+Model: near-field (r=2.0 m)
+
+Final DOA (auto-window): 278.00° (accepted 3/3, dom=1.00)
+
+=== audio/outdoor_2m_90deg_take2.wav ===
+Model: near-field (r=2.0 m)
+
+Final DOA (auto-window): 277.00° (accepted 3/3, dom=1.00)
+
+=== audio/outdoor_2m_90deg_take3.wav ===
+Model: near-field (r=2.0 m)
+
+Final DOA (auto-window): 279.00° (accepted 3/3, dom=1.00)

@@ -1,0 +1,6 @@
+n=17
+n_decided=17
+n_uncertain=0
+uncertain_rate=0.000
+mae_deg=1.71
+median_err_deg=1.00

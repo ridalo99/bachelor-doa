@@ -1,0 +1,20 @@
+
+=== audio/test_90deg_take1.wav ===
+Model: far-field (plane-wave)
+
+Final DOA (auto-window): 259.00° (accepted 3/3, dom=0.84)
+
+=== audio/test_180deg_take1.wav ===
+Model: far-field (plane-wave)
+
+Final DOA (auto-window): UNCERTAIN (accepted 3/3, dom=0.00)
+
+=== audio/test_270deg_take1.wav ===
+Model: far-field (plane-wave)
+
+Final DOA (auto-window): 83.00° (accepted 3/3, dom=1.00)
+
+=== audio/test_270deg_take2.wav ===
+Model: far-field (plane-wave)
+
+Final DOA (auto-window): 88.00° (accepted 3/3, dom=0.51)

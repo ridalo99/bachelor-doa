@@ -21,11 +21,11 @@ def expected_shift_samples(
 ) -> float:
     if source_distance_m is None:
         dij = MICS[j] - MICS[i]
-        return float((dij @ u) / C * fs)
+        return float(-(dij @ u) / C * fs)
     p = float(source_distance_m) * u
     di = float(np.linalg.norm(p - MICS[i]))
     dj = float(np.linalg.norm(p - MICS[j]))
-    return float(((dj - di) / C) * fs)
+    return float(((di - dj) / C ) * fs)
 
 
 def srp_phat_scan(
@@ -65,7 +65,6 @@ def srp_phat_scan(
                     v = max(v, v2)
                 s += v
         scores[k] = s
-
     idx = int(np.argmax(scores))
     best = float(scores[idx])
     sorted_scores = np.sort(scores)[::-1]

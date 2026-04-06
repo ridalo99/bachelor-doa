@@ -1,0 +1,60 @@
+
+=== audio/horn_0deg_10m_take1.wav ===
+Model: far-field (plane-wave)
+
+Final DOA (auto-window): 0.00° (accepted 1/1, dom=0.92)
+
+=== audio/horn_120deg_10m_take1.wav ===
+Model: far-field (plane-wave)
+
+Final DOA (auto-window): UNCERTAIN (accepted 1/1, dom=0.50)
+
+=== audio/horn_150deg_10m_take1.wav ===
+Model: far-field (plane-wave)
+
+Final DOA (auto-window): UNCERTAIN (accepted 1/1, dom=0.50)
+
+=== audio/horn_180deg_10m_take1.wav ===
+Model: far-field (plane-wave)
+
+Final DOA (auto-window): 90.00° (accepted 1/1, dom=0.92)
+
+=== audio/horn_210deg_10m_take1.wav ===
+Model: far-field (plane-wave)
+
+Final DOA (auto-window): 88.00° (accepted 1/1, dom=0.83)
+
+=== audio/horn_240deg_10m_take1.wav ===
+Model: far-field (plane-wave)
+
+Final DOA (auto-window): 46.00° (accepted 1/1, dom=0.57)
+
+=== audio/horn_270deg_10m_take1.wav ===
+Model: far-field (plane-wave)
+
+Final DOA (auto-window): 226.00° (accepted 1/1, dom=0.58)
+
+=== audio/horn_300deg_10m_take1.wav ===
+Model: far-field (plane-wave)
+
+Final DOA (auto-window): UNCERTAIN (accepted 0/1, dom=0.34)
+
+=== audio/horn_30deg_10m_take1.wav ===
+Model: far-field (plane-wave)
+
+Final DOA (auto-window): UNCERTAIN (accepted 0/1, dom=0.35)
+
+=== audio/horn_330deg_10m_take1.wav ===
+Model: far-field (plane-wave)
+
+Final DOA (auto-window): 2.00° (accepted 1/1, dom=0.85)
+
+=== audio/horn_60deg_10m_take1.wav ===
+Model: far-field (plane-wave)
+
+Final DOA (auto-window): 46.00° (accepted 1/1, dom=0.63)
+
+=== audio/horn_90deg_10m_take1.wav ===
+Model: far-field (plane-wave)
+
+Final DOA (auto-window): 90.00° (accepted 1/1, dom=0.97)
