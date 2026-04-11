@@ -17,9 +17,9 @@ C = 343.0
 MIC_TO_CH: Dict[str, int] = {"M1": 1, "M2": 0, "M3": 2, "M4": 3}
 MIC_ORDER = ["M1", "M2", "M3", "M4"]
 CH_ORDER = [MIC_TO_CH[m] for m in MIC_ORDER]
-W = 0.21   # M1 <-> M4 horizontal distance (m)
-H_right = 0.215  # M1 -> M2 vertical distance (m)
-H_left  = 0.215   # M4 -> M3 vertical distance (m)
+W = 0.36   # M1 <-> M4 horizontal distance (m)
+H_right = 0.36  # M1 -> M2 vertical distance (m)
+H_left  = 0.36  # M4 -> M3 vertical distance (m)
 # Define points in a local frame, then center to the array centroid
 M1 = np.array([+W / 2.0, -H_right / 2.0])  # bottom-right
 M2 = np.array([+W / 2.0, +H_right / 2.0])  # top-right

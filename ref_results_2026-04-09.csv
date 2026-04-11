@@ -1,0 +1,20 @@
+angle_deg,take,pred_deg,status,note
+0,1,359,good,≈ 0°
+90,1,45,bad,first take problematic
+90,2,89,good,stable
+90,3,90,good,stable
+180,1,180,good,stable
+270,1,269,good,stable
+150,1,135,usable,systematically shifted
+150,2,135,usable,systematically shifted
+30,1,225,bad,reproducibly wrong
+30,2,225,bad,reproducibly wrong
+60,1,315,bad,not reproducible
+60,2,45,bad,not reproducible
+60,3,180,reject,not reproducible
+120,1,135,bad,not reproducible
+120,2,0,bad,not reproducible
+120,3,315,bad,not reproducible
+300,1,225,reject,not reproducible
+300,2,135,bad,not reproducible
+300,3,45,bad,not reproducible

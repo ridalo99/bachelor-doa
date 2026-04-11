@@ -7,11 +7,7 @@ Key features:
 - multi-window aggregation
 - auto-burst (tone)
 - auto-window (broadband / unknown timing)
-- NEW: auto-window can detect TOP-K loud events in a file/buffer and aggregate them.
-
-Why TOP-K:
-- Your 11s files contain 3 horn events; picking only the loudest one ignores the others.
-- Later for live/ROS2: run on a rolling buffer and detect events the same way.
+- auto-window can detect TOP-K loud events in a file/buffer and aggregate them
 """
 
 from __future__ import annotations
@@ -25,6 +21,7 @@ import soundfile as sf
 from .aggregate import circular_mean_deg_weighted, cluster_quality_mode_tol
 from .dsp import apply_offset, bandpass_sos, clip_center_window
 from .geometry import CH_ORDER, PAIRS_ALL
+from .music import music_topk
 from .segments import auto_segment_centers
 from .srp import srp_phat_scan
 
@@ -90,6 +87,179 @@ def _rms(x: np.ndarray) -> float:
     return float(np.sqrt(np.mean(x * x)))
 
 
+def _circ_dist_deg(a: float, b: float) -> float:
+    d = abs((float(a) - float(b)) % 360.0)
+    return min(d, 360.0 - d)
+
+
+def _candidate_dir_xy(theta_deg: float) -> np.ndarray:
+    rad = np.deg2rad(float(theta_deg))
+    return np.array([np.sin(rad), np.cos(rad)], dtype=np.float64)
+
+
+def _ild_vector_for_window(
+    x: np.ndarray,
+    fs: int,
+    center_time_s: float,
+    win_s: float,
+) -> np.ndarray:
+    center = int(float(center_time_s) * fs)
+    s, t = clip_center_window(center, fs, x.shape[0], float(win_s))
+    xw = x[s:t][:, CH_ORDER]
+
+    if xw.shape[0] == 0:
+        return np.zeros(2, dtype=np.float64)
+
+    rms_ch = np.sqrt(np.mean(np.square(xw), axis=0) + 1e-12)
+
+    # CH_ORDER => M1, M2, M3, M4
+    right = float(rms_ch[0] + rms_ch[1])
+    left = float(rms_ch[2] + rms_ch[3])
+    top = float(rms_ch[1] + rms_ch[2])
+    bottom = float(rms_ch[0] + rms_ch[3])
+
+    vec = np.array([right - left, top - bottom], dtype=np.float64)
+    nrm = float(np.linalg.norm(vec))
+    if nrm < 1e-12:
+        return np.zeros(2, dtype=np.float64)
+    return vec / nrm
+
+
+def _resolve_180_ambiguity_with_ild(
+    topk: Sequence[Tuple[float, float]],
+    ild_vec: np.ndarray,
+    score_ratio_min: float = 0.90,
+    angle_tol_deg: float = 20.0,
+) -> Optional[float]:
+    if len(topk) < 2:
+        return None
+
+    a0, s0 = float(topk[0][0]), float(topk[0][1])
+    a1, s1 = float(topk[1][0]), float(topk[1][1])
+
+    if s0 <= 0.0 or s1 <= 0.0:
+        return None
+
+    if _circ_dist_deg(a0, a1) < (180.0 - float(angle_tol_deg)):
+        return None
+
+    if min(s0, s1) / max(s0, s1) < float(score_ratio_min):
+        return None
+
+    if float(np.linalg.norm(ild_vec)) < 1e-12:
+        return None
+
+    v0 = _candidate_dir_xy(a0)
+    v1 = _candidate_dir_xy(a1)
+
+    d0 = float(np.dot(v0, ild_vec))
+    d1 = float(np.dot(v1, ild_vec))
+
+    return a0 if d0 >= d1 else a1
+
+
+def _is_event_ambiguous(best_r: DoaResult) -> bool:
+    if len(best_r.topk) < 2:
+        return False
+
+    a0, s0 = float(best_r.topk[0][0]), float(best_r.topk[0][1])
+    a1, s1 = float(best_r.topk[1][0]), float(best_r.topk[1][1])
+
+    if s0 <= 0.0:
+        return False
+
+    near_tie = (s1 / s0) >= 0.90
+    low_conf = float(best_r.confidence) < 0.08
+    wide_ambiguity = _circ_dist_deg(a0, a1) >= 150.0
+
+    return low_conf and near_tie and wide_ambiguity
+
+
+def _eval_onset_probe(
+    x: np.ndarray,
+    fs: int,
+    event_start_s: float,
+    srp_subband: int,
+    sym_pair: bool,
+    source_distance_m: Optional[float],
+) -> Optional[DoaResult]:
+    probe_specs = [
+        (0.03, 0.015),
+        (0.05, 0.025),
+    ]
+
+    candidates: List[DoaResult] = []
+    file_tmax = float(x.shape[0] / fs)
+
+    for probe_win_s, probe_center_offset_s in probe_specs:
+        ct = float(event_start_s) + float(probe_center_offset_s)
+        if ct <= 0.0 or ct >= file_tmax:
+            continue
+
+        try:
+            r = eval_center(
+                x=x,
+                fs=fs,
+                center_time_s=ct,
+                win_s=float(probe_win_s),
+                srp_subband=int(srp_subband),
+                sym_pair=bool(sym_pair),
+                source_distance_m=source_distance_m,
+            )
+            candidates.append(r)
+        except Exception:
+            continue
+
+    if not candidates:
+        return None
+
+    return sorted(candidates, key=lambda r: (r.confidence, r.score), reverse=True)[0]
+
+
+def _event_window_channels(
+    x: np.ndarray,
+    fs: int,
+    center_time_s: float,
+    win_s: float,
+) -> np.ndarray:
+    center = int(float(center_time_s) * fs)
+    s, t = clip_center_window(center, fs, x.shape[0], float(win_s))
+    return x[s:t][:, CH_ORDER]
+
+
+def _resolve_ambiguous_event_with_music(
+    x: np.ndarray,
+    fs: int,
+    center_time_s: float,
+    win_s: float,
+    theta_offset_deg: float,
+) -> Optional[Tuple[float, float, List[Tuple[float, float]]]]:
+    xw = _event_window_channels(
+        x=x,
+        fs=fs,
+        center_time_s=float(center_time_s),
+        win_s=float(win_s),
+    )
+    theta_grid = np.arange(0.0, 360.0, 1.0, dtype=np.float64)
+
+    try:
+        music_theta_raw, music_sharpness, music_peaks, _ = music_topk(
+            xw=xw,
+            fs=fs,
+            theta_grid_deg=theta_grid,
+            fmin=700.0,
+            fmax=5000.0,
+            nfft=1024,
+            n_sources=1,
+            topk=5,
+        )
+    except Exception:
+        return None
+
+    music_theta = float(apply_offset(music_theta_raw, float(theta_offset_deg)))
+    return music_theta, float(music_sharpness), music_peaks
+
+
 def find_topk_loud_windows(
     x_mono: np.ndarray,
     fs: int,
@@ -102,11 +272,7 @@ def find_topk_loud_windows(
 ) -> List[Tuple[float, float, float]]:
     """
     Returns list of (w0, w1, rms) for up to topk loudest windows within [t0,t1],
-    enforcing a minimum gap between selected windows (peak suppression).
-
-    Notes:
-    - Designed for repeated horn events.
-    - Works on buffers -> live-friendly.
+    enforcing a minimum gap between selected windows.
     """
     t0 = max(0.0, float(t0))
     t1 = min(float(len(x_mono) / fs), float(t1))
@@ -125,7 +291,6 @@ def find_topk_loud_windows(
         seg = x_mono[int(w0 * fs) : int(w1 * fs)]
         return [(w0, w1, _rms(seg))]
 
-    # Compute envelope on hop grid
     starts = list(range(s0, s1 - win + 1, hop))
     env = np.zeros(len(starts), dtype=np.float64)
     for i, s in enumerate(starts):
@@ -145,12 +310,10 @@ def find_topk_loud_windows(
         w1 = (s + win) / fs
         chosen.append((float(w0), float(w1), float(env[idx])))
 
-        # suppress neighborhood to avoid picking same event
         lo = max(0, idx - suppress)
         hi = min(len(env_work), idx + suppress + 1)
         env_work[lo:hi] = -1.0
 
-    # sort by time (useful for printing)
     chosen.sort(key=lambda a: a[0])
     return chosen
 
@@ -240,17 +403,10 @@ def auto_window_events_doa(
     auto_topk: int,
     auto_min_gap_s: float,
     auto_dom_min: float,
-    # NEW:
     event_min_conf: float,
     event_min_dom: float,
     debug: bool,
 ) -> Tuple[float, List[AutoEventResult], float, int, int]:
-    """
-    Detect TOP-K loud events and estimate DOA per event, then aggregate across ACCEPTED events.
-
-    Returns:
-      final_theta, events, final_dom, accepted_count, total_count
-    """
     t0, t1 = search_range
     windows = find_topk_loud_windows(
         x_mono=x_mono,
@@ -307,18 +463,88 @@ def auto_window_events_doa(
 
         good = [r for r in results if r.confidence >= float(ambig_eps)]
         used = good if good else results
-
-        angles = np.array([apply_offset(r.theta_raw, float(theta_offset_deg)) for r in used], dtype=float)
-        weights = np.array([max(1e-6, float(r.confidence)) for r in used], dtype=float)
-
         best_r = sorted(used, key=lambda r: (r.confidence, r.score), reverse=True)[0]
         best_theta = float(apply_offset(best_r.theta_raw, float(theta_offset_deg)))
         best_conf = float(best_r.confidence)
 
+        # First, evaluate raw SRP event consistency before any fallback
+        angles_srp = np.array([apply_offset(r.theta_raw, float(theta_offset_deg)) for r in used], dtype=float)
+        weights_srp = np.array([max(1e-6, float(r.confidence)) for r in used], dtype=float)
+        mode_theta_srp, dom_ratio_srp, _ = cluster_quality_mode_tol(angles_srp, weights_srp, tol_deg=3)
+
+        ild_vec = _ild_vector_for_window(
+            x=x,
+            fs=fs,
+            center_time_s=float(best_r.center_time_s),
+            win_s=float(win_s),
+        )
+        ild_theta_raw = _resolve_180_ambiguity_with_ild(best_r.topk, ild_vec)
+        if ild_theta_raw is not None:
+            best_theta = float(apply_offset(ild_theta_raw, float(theta_offset_deg)))
+
+        onset_r = None
+        used_onset_fallback = False
+
+        music_theta = None
+        music_sharpness = None
+        music_peaks = None
+        used_music_fallback = False
+
+        need_music = _is_event_ambiguous(best_r) or (float(dom_ratio_srp) < max(float(auto_dom_min)+0.10,0.55))
+
+        if need_music:
+            onset_r = _eval_onset_probe(
+                x=x,
+                fs=fs,
+                event_start_s=float(w0),
+                srp_subband=int(srp_subband),
+                sym_pair=bool(sym_pair),
+                source_distance_m=source_distance_m,
+            )
+            if onset_r is not None and float(onset_r.confidence) >= float(best_r.confidence) + 0.01:
+                best_theta = float(apply_offset(onset_r.theta_raw, float(theta_offset_deg)))
+                best_conf = float(onset_r.confidence)
+                used_onset_fallback = True
+
+            music_res = _resolve_ambiguous_event_with_music(
+                x=x,
+                fs=fs,
+                center_time_s=float(best_r.center_time_s),
+                win_s=float(win_s),
+                theta_offset_deg=float(theta_offset_deg),
+            )
+            if music_res is not None:
+                music_theta, music_sharpness, music_peaks = music_res
+                if float(music_sharpness) >= 0.015:
+                    best_theta = float(music_theta)
+                    best_conf = max(float(best_conf), float(music_sharpness))
+                    print(f"  music_accept_threshold=0.02")
+                    used_music_fallback = True
+
+        angles = np.array(
+            [
+                best_theta
+                if (
+                    r.center_time_s == best_r.center_time_s
+                    and (ild_theta_raw is not None or used_onset_fallback or used_music_fallback)
+                )
+                else apply_offset(r.theta_raw, float(theta_offset_deg))
+                for r in used
+            ],
+            dtype=float,
+        )
+        weights = np.array([max(1e-6, float(r.confidence)) for r in used], dtype=float)
+
         mode_theta, dom_ratio, _ = cluster_quality_mode_tol(angles, weights, tol_deg=3)
+
+        if used_music_fallback and music_sharpness is not None:
+            # SRP-dom_ratio is no longer the right quality metric once MUSIC decided the angle.
+            # Map MUSIC sharpness to a stable event-quality score for acceptance/final output.
+            dom_ratio = max(float(dom_ratio), 0.60 + min(0.30, 4.0 * float(music_sharpness)))
+
         if int(auto_topk) == 1:
             event_theta = best_theta
-        else:    
+        else:
             if str(agg) == "mode":
                 event_theta = float(mode_theta) if dom_ratio >= float(auto_dom_min) else best_theta
             elif str(agg) == "mean":
@@ -333,6 +559,27 @@ def auto_window_events_doa(
             for r in top:
                 th = apply_offset(r.theta_raw, float(theta_offset_deg))
                 print(f"  t={r.center_time_s:.2f}s -> theta={th:.1f}° raw={r.theta_raw:.1f}° conf={r.confidence:.4f}")
+            if ild_theta_raw is not None:
+                print(f"  ild_resolved_theta={apply_offset(ild_theta_raw, float(theta_offset_deg)):.2f}°")
+            if onset_r is not None:
+                print(
+                    f"  onset_probe: theta={apply_offset(onset_r.theta_raw, float(theta_offset_deg)):.2f}° "
+                    f"conf={onset_r.confidence:.4f}"
+                )
+            if used_onset_fallback:
+                print("  onset_fallback_applied=True")
+            if music_theta is not None:
+                print(
+                    f"  music_fallback: theta={music_theta:.2f}° "
+                    f"sharpness={music_sharpness:.4f}"
+                )
+                top2 = ", ".join([f"({a:.1f}°, {s:.4f})" for a, s in music_peaks[:2]])
+                print(f"  music_top2=[{top2}]")
+            if used_music_fallback:
+                print("  music_fallback_applied=True")
+            if used_music_fallback and music_sharpness is not None:
+                print(f"  dom_ratio_promoted_from_music={dom_ratio:.2f}")    
+            print(f"  srp_dom_ratio_pre_fallback={dom_ratio_srp:.2f} need_music={need_music}")
             print(f"  dom_ratio={dom_ratio:.2f} best_conf={best_conf:.4f} event_theta={event_theta:.2f}°")
 
         events.append(
@@ -354,31 +601,32 @@ def auto_window_events_doa(
     if not events:
         raise RuntimeError("auto-window: no events found")
 
-    # ----- GATING -----
+    max_event_rms = max(float(e.rms) for e in events) if events else 0.0
+    event_rms_rel_min = 0.10
+
     accepted = [
         e for e in events
-        if (e.best_conf >= float(event_min_conf)) and (e.dom_ratio >= float(event_min_dom))
+        if (e.best_conf >= float(event_min_conf))
+        and (e.dom_ratio >= float(event_min_dom))
+        and (float(e.rms) >= event_rms_rel_min * max_event_rms)
     ]
-    # HARD RULE: if only one accepted event, final == that event
+
     if len(accepted) == 1:
         return float(accepted[0].theta_deg), events, float(accepted[0].dom_ratio), 1, len(events)
-    def circ_dist_deg(a, b):
+
+    def circ_dist_deg(a: float, b: float) -> float:
         d = (a - b) % 360.0
         return d - 360.0 if d > 180.0 else d
 
-    # after accepted list built:
     if len(accepted) >= 2:
-        # weights like before
         ang = np.array([e.theta_deg for e in accepted], dtype=float)
         wts = np.array([max(1e-6, e.rms) * max(1e-3, e.best_conf) for e in accepted], dtype=float)
 
-        # find two strongest accepted events
         idx = np.argsort(wts)[::-1]
         a1, a2 = float(ang[idx[0]]), float(ang[idx[1]])
         d = abs(circ_dist_deg(a1, a2))
 
         if abs(d - 180.0) <= 15.0:
-            # AMBIGUOUS: don't average; prefer the BEST event only (safe fallback)
             best = int(idx[0])
             return float(ang[best]), events, 0.0, len(accepted), len(events)
 
@@ -386,9 +634,11 @@ def auto_window_events_doa(
         print("\nAuto-window events summary:")
         for e in events:
             status = "ACCEPT" if e in accepted else "REJECT"
+            rel_rms = (float(e.rms) / max_event_rms) if max_event_rms > 0.0 else 0.0
             print(
                 f"  event{e.event_idx}: win={e.window_t0:.2f}-{e.window_t1:.2f}s "
                 f"theta={e.theta_deg:.2f}° dom={e.dom_ratio:.2f} best_conf={e.best_conf:.4f} "
+                f"rms={e.rms:.6f} rel_rms={rel_rms:.3f} "
                 f"used={e.used}/{e.total} -> {status}"
             )
 
@@ -401,7 +651,7 @@ def auto_window_events_doa(
         fallback_theta = float(events[best_idx].theta_deg)
         fallback_dom = float(events[best_idx].dom_ratio)
         return fallback_theta, events, fallback_dom, 0, len(events)
-    # ----- FINAL AGGREGATION over accepted events -----
+
     ang = np.array([e.theta_deg for e in accepted], dtype=float)
     wts = np.array([max(1e-6, e.rms) * max(1e-3, e.best_conf) for e in accepted], dtype=float)
 
@@ -530,8 +780,8 @@ def run_one(
     seg_min_len_s: float,
     seg_pad_s: float,
     debug: bool,
-    event_min_conf:float,
-    event_min_dom:float,
+    event_min_conf: float,
+    event_min_dom: float,
     auto_window: bool,
     auto_window_len_s: float,
     auto_window_hop_s: float,
@@ -543,13 +793,13 @@ def run_one(
     x, fs = sf.read(wav_path, always_2d=True)
     if bandpass is not None:
         x = bandpass_sos(x, fs, float(bandpass[0]), float(bandpass[1]))
-    #x[:, 2] *= -1.0    
     x_mono = np.mean(x, axis=1).astype(np.float64)
 
     print(f"\n=== {wav_path} ===")
-    print(f"Model: {'near-field (r=' + str(source_distance_m) + ' m)' if source_distance_m is not None else 'far-field (plane-wave)'}")
+    print(
+        f"Model: {'near-field (r=' + str(source_distance_m) + ' m)' if source_distance_m is not None else 'far-field (plane-wave)'}"
+    )
 
-    # If user didn't select a mode, default to auto-window (live-friendly)
     if auto_window or (not auto_burst and time_range is None and multi_range is None):
         search_t0, search_t1 = 0.0, float(x.shape[0] / fs)
         if multi_range is not None:
